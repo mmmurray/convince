@@ -1,6 +1,6 @@
 {
   "name": "convince",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Type safe schema validation library.",
   "author": "Mark Murray",
   "license": "MIT",
@@ -13,6 +13,7 @@
   "files": [
     "lib"
   ],
+  "sideEffects": false,
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
