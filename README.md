@@ -1,6 +1,6 @@
 # Convince
 
-Type safe schema validation library. Lightweight alternative to [Zod](https://github.com/colinhacks/zod)
+Type safe schema validation library. Lightweight alternative to [Zod](https://github.com/colinhacks/zod).
 
 ## Install
 
