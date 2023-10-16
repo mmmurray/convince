@@ -1,12 +1,12 @@
-import { createSchema } from '../create-schema';
-import { error, ok } from '../result';
-import { Schema } from '../types';
+import { createSchema } from "../create-schema";
+import { error, ok } from "../result";
+import { Schema } from "../types";
 
 export const record = <TValue>(
-  valueParser: Schema<TValue>,
+  valueParser: Schema<TValue>
 ): Schema<{ [key in string]?: TValue }> => {
   return createSchema((data) => {
-    if (typeof data !== 'object') {
+    if (typeof data !== "object") {
       return error(`Expected object, received ${typeof data}`);
     }
     if (data === null) {
@@ -16,7 +16,7 @@ export const record = <TValue>(
     const record: { [key in string]?: TValue } = {};
 
     for (const [key, value] of Object.entries(
-      data as { [key in string]?: unknown },
+      data as { [key in string]?: unknown }
     )) {
       const valueResult = valueParser.parse(value);
 

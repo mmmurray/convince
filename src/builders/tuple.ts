@@ -1,6 +1,6 @@
-import { createSchema } from '../create-schema';
-import { error, ok } from '../result';
-import { Schema } from '../types';
+import { createSchema } from "../create-schema";
+import { error, ok } from "../result";
+import { Schema } from "../types";
 
 export const tuple = <TElements extends [...any[]]>(
   ...elementParsers: {
@@ -16,7 +16,7 @@ export const tuple = <TElements extends [...any[]]>(
 
     if (items.length !== elementParsers.length) {
       return error(
-        `Expected tuple to have ${elementParsers.length} elements, received ${items.length}`,
+        `Expected tuple to have ${elementParsers.length} elements, received ${items.length}`
       );
     }
 

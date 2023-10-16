@@ -1,9 +1,9 @@
 {
   "name": "convince",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Type safe schema validation library.",
   "author": "Mark Murray",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "repository": "git@github.com:mmmurray/convince.git",
   "keywords": [
     "schema",

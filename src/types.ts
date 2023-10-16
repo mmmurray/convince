@@ -1,6 +1,6 @@
-import { Result } from './result';
+import { Result } from "./result";
 
-type SchemaKind = 'Default' | 'Optional';
+type SchemaKind = "Default" | "Optional";
 
 export type Schema<T> = {
   kind: SchemaKind;

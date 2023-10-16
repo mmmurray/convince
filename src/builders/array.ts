@@ -1,9 +1,9 @@
-import { createSchema } from '../create-schema';
-import { error, ok } from '../result';
-import { Schema } from '../types';
+import { createSchema } from "../create-schema";
+import { error, ok } from "../result";
+import { Schema } from "../types";
 
 export const array = <TElement>(
-  elementParser: Schema<TElement>,
+  elementParser: Schema<TElement>
 ): Schema<TElement[]> => {
   return createSchema((data) => {
     if (!Array.isArray(data)) {

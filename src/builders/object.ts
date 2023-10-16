@@ -1,6 +1,6 @@
-import { createSchema } from '../create-schema';
-import { error, ok } from '../result';
-import { Schema, SchemaType } from '../types';
+import { createSchema } from "../create-schema";
+import { error, ok } from "../result";
+import { Schema, SchemaType } from "../types";
 
 type UndefinedKeys<T extends object> = {
   [k in keyof T]: undefined extends T[k] ? k : never;
@@ -22,10 +22,10 @@ type PropertyParserResult<TPropertyParsers extends PropertyParsersBase> =
   }>;
 
 export const object = <TPropertyParsers extends PropertyParsersBase>(
-  propertyParsers: TPropertyParsers,
+  propertyParsers: TPropertyParsers
 ): Schema<PropertyParserResult<TPropertyParsers>> => {
   return createSchema<PropertyParserResult<TPropertyParsers>>((data) => {
-    if (data && typeof data === 'object') {
+    if (data && typeof data === "object") {
       const record = {} as any;
 
       for (const [key, parser] of Object.entries(propertyParsers)) {
@@ -33,7 +33,7 @@ export const object = <TPropertyParsers extends PropertyParsersBase>(
           !(key in data) ||
           (data as Record<string, unknown>)[key] === undefined
         ) {
-          if (parser.kind !== 'Optional') {
+          if (parser.kind !== "Optional") {
             return error(`Missing required property '${key}' in object`);
           }
         } else {
@@ -42,7 +42,7 @@ export const object = <TPropertyParsers extends PropertyParsersBase>(
 
           if (!propertyResult.ok) {
             return error(
-              `Record property parse error (${key}): ${propertyResult.message}`,
+              `Record property parse error (${key}): ${propertyResult.message}`
             );
           }
 

@@ -1,25 +1,25 @@
-import { s } from '..';
-import { error, ok } from '../result';
+import { s } from "..";
+import { error, ok } from "../result";
 
-test('object schema', () => {
+test("object schema", () => {
   const schema = s.object({
     foo: s.string(),
     bar: s.number().optional(),
     baz: s.boolean(),
   });
 
-  const result1 = schema.parse({ foo: 'a', bar: 1, baz: true });
-  const result2 = schema.parse({ foo: 'b', baz: false });
-  const result3 = schema.parse({ foo: 'a', bar: 1 });
+  const result1 = schema.parse({ foo: "a", bar: 1, baz: true });
+  const result2 = schema.parse({ foo: "b", baz: false });
+  const result3 = schema.parse({ foo: "a", bar: 1 });
   const result4 = schema.parse(true);
 
-  expect(result1).toEqual(ok({ foo: 'a', bar: 1, baz: true }));
-  expect(result2).toEqual(ok({ foo: 'b', baz: false }));
+  expect(result1).toEqual(ok({ foo: "a", bar: 1, baz: true }));
+  expect(result2).toEqual(ok({ foo: "b", baz: false }));
   expect(result3).toEqual(error(`Missing required property 'baz' in object`));
-  expect(result4).toEqual(error('Expected object, received boolean'));
+  expect(result4).toEqual(error("Expected object, received boolean"));
 });
 
-test('optional object value schema', () => {
+test("optional object value schema", () => {
   const schema = s.object({
     a: s.number().optional(),
   });
@@ -35,11 +35,11 @@ test('optional object value schema', () => {
   expect(result3).toEqual(ok({}));
   expect(result4).toEqual(ok({}));
   expect(result5).toEqual(
-    error('Record property parse error (a): Expected number, received object'),
+    error("Record property parse error (a): Expected number, received object")
   );
 });
 
-test('nullable object value schema', () => {
+test("nullable object value schema", () => {
   const schema = s.object({
     a: s.number().nullable(),
   });
@@ -57,7 +57,7 @@ test('nullable object value schema', () => {
   expect(result5).toEqual(error("Missing required property 'a' in object"));
 });
 
-test('object extend schema', () => {
+test("object extend schema", () => {
   const schemaA = s.object({
     foo: s.string(),
     bar: s.number().optional(),
@@ -66,18 +66,18 @@ test('object extend schema', () => {
   const schema = schemaA.extend(
     s.object({
       baz: s.boolean(),
-    }),
+    })
   );
 
-  const result1 = schema.parse({ foo: 'a', bar: 1, baz: true });
-  const result2 = schema.parse({ foo: 'b', baz: false });
-  const result3 = schema.parse({ foo: 'a', bar: 1 });
+  const result1 = schema.parse({ foo: "a", bar: 1, baz: true });
+  const result2 = schema.parse({ foo: "b", baz: false });
+  const result3 = schema.parse({ foo: "a", bar: 1 });
   const result4 = schema.parse(true);
 
-  expect(result1).toEqual(ok({ foo: 'a', bar: 1, baz: true }));
-  expect(result2).toEqual(ok({ foo: 'b', baz: false }));
+  expect(result1).toEqual(ok({ foo: "a", bar: 1, baz: true }));
+  expect(result2).toEqual(ok({ foo: "b", baz: false }));
   expect(result3).toEqual(error(`Missing required property 'baz' in object`));
-  expect(result4).toEqual(error('Expected object, received boolean'));
+  expect(result4).toEqual(error("Expected object, received boolean"));
 
   if (result1.ok) {
     result1.data.foo;
@@ -86,7 +86,7 @@ test('object extend schema', () => {
   }
 });
 
-test('object JSON schema', () => {
+test("object JSON schema", () => {
   const schema = s.object({
     foo: s.string(),
     bar: s.number().optional(),
@@ -95,11 +95,11 @@ test('object JSON schema', () => {
 
   const result1 = schema.parseJSON('{ "foo": "a", "bar": 1, "baz": true }');
   const result2 = schema.parseJSON('{ "foo": "a", "bar": 1 }');
-  const result3 = schema.parseJSON('???');
-  const result4 = schema.parseJSON('');
+  const result3 = schema.parseJSON("???");
+  const result4 = schema.parseJSON("");
 
-  expect(result1).toEqual(ok({ foo: 'a', bar: 1, baz: true }));
+  expect(result1).toEqual(ok({ foo: "a", bar: 1, baz: true }));
   expect(result2).toEqual(error(`Missing required property 'baz' in object`));
-  expect(result3).toEqual(error('Invalid JSON'));
-  expect(result4).toEqual(error('Invalid JSON'));
+  expect(result3).toEqual(error("Invalid JSON"));
+  expect(result4).toEqual(error("Invalid JSON"));
 });
