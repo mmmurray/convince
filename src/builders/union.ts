@@ -1,9 +1,9 @@
-import { createSchema } from '../create-schema';
-import { error } from '../result';
-import { Schema, SchemaType } from '../types';
+import { createSchema } from "../create-schema";
+import { error } from "../result";
+import { Schema, SchemaType } from "../types";
 
 export const union = <
-  TVariants extends [Schema<any>, Schema<any>, ...Schema<any>[]],
+  TVariants extends [Schema<any>, Schema<any>, ...Schema<any>[]]
 >(
   ...variants: TVariants
 ): Schema<SchemaType<TVariants[number]>> => {
@@ -19,6 +19,6 @@ export const union = <
       }
     }
 
-    return error(`No matching union variant:\n${errors.join('\n')}`);
+    return error(`No matching union variant:\n${errors.join("\n")}`);
   });
 };

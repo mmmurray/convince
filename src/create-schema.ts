@@ -1,9 +1,9 @@
-import { error, ok, Result } from './result';
-import { Schema } from './types';
+import { error, ok, Result } from "./result";
+import { Schema } from "./types";
 
 export const createSchema = <T>(
   parse: (data: unknown) => Result<T>,
-  kind: Schema<T>['kind'] = 'Default',
+  kind: Schema<T>["kind"] = "Default"
 ): Schema<T> => {
   return {
     kind,
@@ -13,7 +13,7 @@ export const createSchema = <T>(
         const data = JSON.parse(json);
         return parse(data);
       } catch (error) {
-        return { ok: false, message: 'Invalid JSON' };
+        return { ok: false, message: "Invalid JSON" };
       }
     },
     optional: () => {
@@ -22,7 +22,7 @@ export const createSchema = <T>(
           return ok(undefined);
         }
         return parse(data);
-      }, 'Optional');
+      }, "Optional");
     },
     nullable: () => {
       return createSchema<T | null>((data) => {
@@ -40,7 +40,7 @@ export const createSchema = <T>(
         }
         const valid = predicate(result.data);
         if (!valid) {
-          return error('Validation failed');
+          return error("Validation failed");
         }
         return result;
       });
